@@ -1,25 +1,37 @@
-import Profile from './Profile/Profile';
-import Statistics from './Statistics/Statistics';
-import user from '../data/user.json';
-import data from '../data/data.json';
-import FriendsElement from './FriendList/FriendList';
-import friends from '../data/friends.json';
-import TransactionHistory from './TransactionHistory/TransactionHistory';
-import transactions from '../data/transactions.json';
+import { Component } from 'react';
+import FeedBack from './Feedback/FeedBack';
 
-export const App = () => {
-  return (
-    <>
-      <Profile
-        username={user.username}
-        tag={user.tag}
-        location={user.location}
-        avatar={user.avatar}
-        stats={user.stats}
+export class App extends Component {
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+    total: 0,
+  };
+
+  hendleClick = value => {
+    this.setState(prevState => ({
+      ...prevState,
+      [value]: prevState[value] + 1,
+    }));
+  };
+
+  countTotalFeedback = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      total: prevState.good + prevState.neutral + prevState.bad,
+    }));
+  };
+
+  render() {
+    const { good, neutral, bad } = this.state;
+    return (
+      <FeedBack
+        hendleClick={this.hendleClick}
+        good={good}
+        neutral={neutral}
+        bad={bad}
       />
-      <Statistics title="Upload stats" stats={data} />
-      <FriendsElement friends={friends} />
-      <TransactionHistory items={transactions} />
-    </>
-  );
-};
+    );
+  }
+}
