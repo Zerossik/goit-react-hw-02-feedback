@@ -2,11 +2,25 @@ import { Component } from 'react';
 import FeedBack from './Feedback/FeedBack';
 
 export class App extends Component {
+  totalFeedback = 0;
+  positivePercentageFeedback = 0;
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
+  };
+
+  countTotalFeedback = () => {
+    this.setState(prevState => {
+      this.totalFeedback = prevState.good + prevState.neutral + prevState.bad;
+    });
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    this.setState(prevState => {
+      this.positivePercentageFeedback =
+        (prevState.good / this.totalFeedback) * 100;
+    });
   };
 
   hendleClick = value => {
@@ -14,13 +28,8 @@ export class App extends Component {
       ...prevState,
       [value]: prevState[value] + 1,
     }));
-  };
-
-  countTotalFeedback = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      total: prevState.good + prevState.neutral + prevState.bad,
-    }));
+    this.countTotalFeedback();
+    this.countPositiveFeedbackPercentage();
   };
 
   render() {
@@ -31,6 +40,8 @@ export class App extends Component {
         good={good}
         neutral={neutral}
         bad={bad}
+        total={this.totalFeedback}
+        positivePercentage={this.positivePercentageFeedback}
       />
     );
   }

@@ -1,4 +1,11 @@
-const FeedBack = ({ hendleClick, good, neutral, bad }) => {
+const FeedBack = ({
+  hendleClick,
+  good,
+  neutral,
+  bad,
+  total,
+  positivePercentage,
+}) => {
   return (
     <div>
       <h2>Please leave feedback</h2>
@@ -16,6 +23,8 @@ const FeedBack = ({ hendleClick, good, neutral, bad }) => {
         <p>Good: {good}</p>
         <p>Neutral: {neutral}</p>
         <p>Bad: {bad}</p>
+        <p>Total: {total}</p>
+        <p>Positive feedback: {Math.floor(positivePercentage)}%</p>
       </div>
     </div>
   );
