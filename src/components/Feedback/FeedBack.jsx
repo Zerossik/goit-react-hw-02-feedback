@@ -23,8 +23,8 @@ const FeedBack = ({
         <p>Good: {good}</p>
         <p>Neutral: {neutral}</p>
         <p>Bad: {bad}</p>
-        <p>Total: {total}</p>
-        <p>Positive feedback: {Math.floor(positivePercentage)}%</p>
+        <p>Total: {total()}</p>
+        <p>Positive feedback: {good ? Math.round(positivePercentage()) : 0}%</p>
       </div>
     </div>
   );
