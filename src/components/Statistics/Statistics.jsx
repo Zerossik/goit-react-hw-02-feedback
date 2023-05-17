@@ -1,7 +1,14 @@
-import { Notification } from './Notification';
+// import { Notification } from './Notification';
 import PropTypes from 'prop-types';
 
-export function Statistics({ good, neutral, bad, total, positivePercentage }) {
+export function Statistics({
+  good,
+  neutral,
+  bad,
+  total,
+  positivePercentage,
+  children,
+}) {
   const totalFeedback = total();
   return (
     <div>
@@ -17,7 +24,7 @@ export function Statistics({ good, neutral, bad, total, positivePercentage }) {
           </p>
         </>
       ) : (
-        <Notification message={'There is no feedback'} />
+        children
       )}
     </div>
   );
